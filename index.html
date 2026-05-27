@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ariete — Tools</title>
+  <meta name="description" content="Ariete Tech Solutions — internal and client tools." />
+  <link rel="icon" href="https://arietecapital.com/wp-content/uploads/2025/08/cropped-ariete-capital-favicon-192x192.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;0,500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      /* Ariete Capital brand palette */
+      --navy: #101935;
+      --navy-deep: #0a1028;
+      --slate: #2D3346;
+      --gold: #C9A84C;
+      --gold-soft: #d8bb6a;
+      --rust: #993C1D;
+      --orange: #D26C1C;
+      --ivory: #f5f1e6;
+      --ink: #ffffff;
+      --ink-soft: rgba(245, 241, 230, 0.62);
+      --ink-faint: rgba(245, 241, 230, 0.32);
+      --rule: rgba(201, 168, 76, 0.22);
+      --rule-soft: rgba(245, 241, 230, 0.12);
+      --surface: rgba(255, 255, 255, 0.035);
+      --surface-hover: rgba(201, 168, 76, 0.06);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+
+    body {
+      background: var(--navy);
+      background-image:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(201, 168, 76, 0.10), transparent 60%),
+        radial-gradient(ellipse 60% 40% at 100% 100%, rgba(153, 60, 29, 0.08), transparent 60%);
+      color: var(--ink);
+      font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 72px 32px 48px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header / brand */
+    .brand {
+      text-align: center;
+      margin-bottom: 72px;
+    }
+
+    .brand__logo {
+      display: block;
+      margin: 0 auto 22px;
+      max-width: 280px;
+      width: 100%;
+      height: auto;
+    }
+
+    .brand__rule {
+      width: 28px;
+      height: 1px;
+      background: var(--gold);
+      margin: 0 auto 18px;
+      opacity: 0.85;
+    }
+
+    .brand__tagline {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 300;
+      font-style: italic;
+      font-size: 18px;
+      letter-spacing: 0.02em;
+      color: var(--ink-soft);
+      margin: 0;
+    }
+
+    /* Sections */
+    .section + .section { margin-top: 44px; }
+
+    .section__label {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+
+    .section__label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, var(--rule), transparent);
+    }
+
+    .links {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .link {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 20px 24px;
+      background: var(--surface);
+      border: 1px solid var(--rule-soft);
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 500;
+      backdrop-filter: blur(4px);
+      transition: border-color 240ms ease, background 240ms ease, transform 240ms ease;
+      overflow: hidden;
+    }
+
+    .link::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--gold);
+      transform: scaleY(0);
+      transform-origin: center;
+      transition: transform 240ms ease;
+    }
+
+    .link:hover {
+      border-color: var(--rule);
+      background: var(--surface-hover);
+      transform: translateY(-1px);
+    }
+
+    .link:hover::before { transform: scaleY(1); }
+
+    .link__title {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 0;
+    }
+
+    .link__name {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 400;
+      font-size: 19px;
+      letter-spacing: 0.005em;
+      color: var(--ivory);
+      line-height: 1.2;
+    }
+
+    .link__host {
+      font-family: 'Montserrat', monospace;
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--ink-faint);
+      letter-spacing: 0.08em;
+      text-transform: lowercase;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .link__arrow {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 16px;
+      color: var(--gold);
+      opacity: 0.55;
+      transition: transform 240ms ease, opacity 240ms ease;
+      flex-shrink: 0;
+    }
+
+    .link:hover .link__arrow {
+      transform: translateX(4px);
+      opacity: 1;
+    }
+
+    /* Coming soon variant */
+    .link--soon {
+      background: transparent;
+      border-style: dashed;
+      border-color: var(--rule-soft);
+      cursor: not-allowed;
+    }
+
+    .link--soon .link__name { color: var(--ink-soft); }
+    .link--soon:hover {
+      transform: none;
+      background: transparent;
+      border-color: var(--rule-soft);
+    }
+    .link--soon:hover::before { transform: scaleY(0); }
+
+    .tag {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      padding: 4px 8px;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      background: transparent;
+      flex-shrink: 0;
+    }
+
+    .tag--mvp {
+      display: inline-block;
+      margin-left: 10px;
+      vertical-align: middle;
+      transform: translateY(-2px);
+      font-size: 8px;
+      padding: 3px 6px;
+      border-color: var(--rule);
+      color: var(--gold-soft);
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 80px;
+      padding-top: 28px;
+      border-top: 1px solid var(--rule-soft);
+      text-align: center;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+    }
+
+    footer a {
+      color: var(--ink-soft);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: color 240ms ease, border-color 240ms ease;
+    }
+
+    footer a:hover {
+      color: var(--gold);
+      border-bottom-color: var(--gold);
+    }
+
+    @media (max-width: 480px) {
+      .page { padding: 48px 20px 36px; }
+      .brand { margin-bottom: 52px; }
+      .brand__logo { max-width: 180px; }
+      .brand__tagline { font-size: 16px; }
+      .link { padding: 18px 20px; }
+      .link__name { font-size: 17px; }
+      .section + .section { margin-top: 36px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="brand">
+      <img
+        class="brand__logo"
+        src="logo.PNG"
+        alt="Ariete Capital"
+      />
+      <div class="brand__rule" aria-hidden="true"></div>
+      <p class="brand__tagline">The Future Within</p>
+    </header>
+
+    <section class="section" aria-labelledby="tools-label">
+      <div id="tools-label" class="section__label">Tools</div>
+      <ul class="links">
+        <li>
+          <span class="link link--soon" aria-disabled="true">
+            <span class="link__title">
+              <span class="link__name">Investor Portal</span>
+              <span class="link__host">arietetech.com</span>
+            </span>
+            <span class="tag">Coming soon</span>
+          </span>
+        </li>
+        <li>
+          <a class="link" href="https://agentportal.arietetech.com" target="_blank" rel="noopener">
+            <span class="link__title">
+              <span class="link__name">Agent Portal</span>
+              <span class="link__host">agentportal.arietetech.com</span>
+            </span>
+            <span class="link__arrow" aria-hidden="true">→</span>
+          </a>
+        </li>
+        <li>
+          <a class="link" href="https://marketing-dashboard-six-kappa.vercel.app/it" target="_blank" rel="noopener">
+            <span class="link__title">
+              <span class="link__name">Marketing Dashboard<span class="tag tag--mvp">MVP</span></span>
+              <span class="link__host">marketing-dashboard-six-kappa.vercel.app</span>
+            </span>
+            <span class="link__arrow" aria-hidden="true">→</span>
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <section class="section" aria-labelledby="selfhosted-label">
+      <div id="selfhosted-label" class="section__label">Self-hosted</div>
+      <ul class="links">
+        <li>
+          <a class="link" href="https://documenso.arietetech.com" target="_blank" rel="noopener">
+            <span class="link__title">
+              <span class="link__name">Documenso</span>
+              <span class="link__host">documenso.arietetech.com</span>
+            </span>
+            <span class="link__arrow" aria-hidden="true">→</span>
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <section class="section" aria-labelledby="clients-label">
+      <div id="clients-label" class="section__label">Client Tools</div>
+      <ul class="links">
+        <li>
+          <a class="link" href="https://libertyclienthub.arietetech.com" target="_blank" rel="noopener">
+            <span class="link__title">
+              <span class="link__name">Liberty Client Hub</span>
+              <span class="link__host">libertyclienthub.arietetech.com</span>
+            </span>
+            <span class="link__arrow" aria-hidden="true">→</span>
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <footer>
+      © <span id="year"></span> Ariete Capital Group · <a href="https://arietecapital.com">arietecapital.com</a>
+    </footer>
+  </main>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
